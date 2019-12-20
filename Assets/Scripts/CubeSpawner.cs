@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿
+using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CubeSpawner : MonoBehaviour {
     [SerializeField] GameObject cubePrefab = null;
@@ -19,6 +21,8 @@ public class CubeSpawner : MonoBehaviour {
                 cube.name = $"Cube [{i}, {j}]";
             }
         }
+
+        UnityEditor.SceneManagement.EditorSceneManager.MarkSceneDirty(cubeGroup.gameObject.scene);
     }
 #endif
 }
