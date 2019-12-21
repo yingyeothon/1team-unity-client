@@ -38,6 +38,8 @@ public class Network : MonoBehaviour {
         if (message.StartsWith("{\"type\":\"load\",")) {
             var loadResponse = JsonConvert.DeserializeObject<Response.LoadResponse>(message);
             Debug.Log(JsonConvert.SerializeObject(loadResponse));
+
+            UserInterface.instance.OnPlayerColorChange(loadResponse.me.color);
         }
     }
 
