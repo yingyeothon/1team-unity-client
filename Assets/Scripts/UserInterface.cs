@@ -1,4 +1,4 @@
-﻿using System;
+﻿using Response;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -35,6 +35,10 @@ public class UserInterface : MonoBehaviour {
     public void OnPlayerColorChange(string playerColor) {
         ColorUtility.TryParseHtmlString(playerColor, out var color);
         playerImage.color = color;
+    }
+
+    public void OnTileChanges(TileChange[] tileChanges) {
+        Debug.Log("OnTileChanges");
     }
 
     public void OnResultGameScore() {
