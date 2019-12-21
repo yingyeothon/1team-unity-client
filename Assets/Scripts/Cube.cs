@@ -6,7 +6,7 @@ public class Cube : MonoBehaviour {
     [SerializeField] Renderer capRenderer = null;
     [SerializeField] int x = 0;
     [SerializeField] int y = 0;
-    [SerializeField] Renderer renderer = null;
+    [SerializeField] Renderer cubeRenderer = null;
     
     TileInfo tileInfo;
 
@@ -64,6 +64,6 @@ public class Cube : MonoBehaviour {
 
     internal void SetColor(string v) {
         ColorUtility.TryParseHtmlString(v, out var color);
-        renderer.material.SetColor("_Color", color);
+        cubeRenderer.material.SetColor("_Color", color);
     }
 }

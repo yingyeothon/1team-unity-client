@@ -76,4 +76,12 @@ namespace Response {
         public int v;
         public int l;
     }
+
+    [System.Serializable]
+    public struct Stage
+    {
+        public string type;
+        public string stage;
+        public int age;
+    }
 }

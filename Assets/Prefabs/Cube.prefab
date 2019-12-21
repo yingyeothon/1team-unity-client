@@ -108,7 +108,7 @@ MonoBehaviour:
   capRenderer: {fileID: 6558549229145554184}
   x: 0
   y: 0
-  renderer: {fileID: 385784498101070722}
+  cubeRenderer: {fileID: 385784498101070722}
 --- !u!1 &6555911700520100178
 GameObject:
   m_ObjectHideFlags: 0

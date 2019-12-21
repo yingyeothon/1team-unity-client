@@ -45,6 +45,13 @@ public class Network : MonoBehaviour {
             Debug.Log("ServerClick: " + JsonConvert.SerializeObject(clickResponse));
 
             UserInterface.instance.OnTileChanges(clickResponse.changes);
+        } else if (message.StartsWith("{\"type\":\"stage\",")) {
+            var stage = JsonConvert.DeserializeObject<Response.Stage>(message);
+            if (stage.stage == "wait") {
+                UserInterface.instance.OnWait(stage.age);
+            } else if (stage.stage == "running") {
+                UserInterface.instance.OnRunning(stage.age);
+            }
         }
     }
 

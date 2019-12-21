@@ -3,6 +3,7 @@ using Response;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
+using TMPro;
 
 public class UserInterface : MonoBehaviour {
     [SerializeField] Image playerImage = null;
@@ -10,6 +11,9 @@ public class UserInterface : MonoBehaviour {
     [SerializeField] ResultWindow resultWindow = null;
     [SerializeField] GameObject tileInfoPrefab = null;
     [SerializeField] Transform tileInfoGroup = null;
+    [SerializeField] Transform waitWindow = null;
+    [SerializeField] TextMeshProUGUI waitText = null;
+    [SerializeField] TextMeshProUGUI runningTimeText = null;
     
     public static UserInterface instance;
 
@@ -57,11 +61,22 @@ public class UserInterface : MonoBehaviour {
     public void OnResultGameScore() {
         playerInfoWindow.gameObject.SetActive(false);
         resultWindow.gameObject.SetActive(true);
-
         resultWindow.ClearAll();
     }
 
     public void OnResultAddEntry(string color, string score) {
         resultWindow.AddEntry(color, score);
+    }
+
+    public void OnWait(int age) {
+        waitWindow.gameObject.SetActive(true);
+        resultWindow.gameObject.SetActive(false);
+        waitText.text = $"Please Wait...{age}";
+    }
+
+    public void OnRunning(int age) {
+        waitWindow.gameObject.SetActive(false);
+        resultWindow.gameObject.SetActive(false);
+        runningTimeText.text = $"{age} sec";
     }
 }
