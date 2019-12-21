@@ -4,6 +4,16 @@ using UnityEngine.EventSystems;
 public class Cube : MonoBehaviour {
     [SerializeField] Renderer capRenderer = null;
 
+    TileInfo tileInfo;
+    
+    void Awake() {
+        tileInfo = UserInterface.instance.InstantiateTileInfo(this);
+    }
+
+    void OnDestroy() {
+        Destroy(tileInfo.gameObject);
+    }
+
     void OnMouseEnter() {
         SetHighlightHeightConditional();
     }

@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 public class CubeSpawner : MonoBehaviour {
     [SerializeField] GameObject cubePrefab = null;
     [SerializeField] Transform cubeGroup = null;
+    // [SerializeField] GameObject tileInfoPrefab = null;
+    // [SerializeField] Transform tileInfoGroup = null;
 
 #if UNITY_EDITOR
     [ContextMenu("Spawn All Cubes")]
@@ -19,6 +21,11 @@ public class CubeSpawner : MonoBehaviour {
                 cube.transform.localPosition = new Vector3(i, -0.4f, j);
                 // var cube = Instantiate(cubePrefab, new Vector3(i, -0.4f, j), Quaternion.identity, cubeGroup);
                 cube.name = $"Cube [{i}, {j}]";
+
+                // var tileInfo = (UnityEditor.PrefabUtility.InstantiatePrefab(tileInfoPrefab, tileInfoGroup) as GameObject).GetComponent<TileInfo>();
+                // tileInfo.Tile = cube.transform;
+                // tileInfo.InitBind();
+                // tileInfo.UpdatePosition();
             }
         }
 
