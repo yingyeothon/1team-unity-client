@@ -12,7 +12,7 @@ public class Network : MonoBehaviour {
     }
 
     void Start() {
-        webSocket = new WebSocket(new System.Uri("wss://cy18u3zcwk.execute-api.ap-northeast-2.amazonaws.com/dev"));
+        webSocket = new WebSocket(new System.Uri("wss://8tl0tknp30.execute-api.ap-northeast-2.amazonaws.com/dev"));
         webSocket.OnOpen += OnWebSocketOpen;
         webSocket.OnMessage += OnMessageReceived;
         webSocket.OnBinary += OnBinaryMessageReceived;
