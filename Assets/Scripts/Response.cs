@@ -20,6 +20,13 @@ namespace Response {
     }
 
     [System.Serializable]
+    public struct ClickResponse
+    {
+        public string type;
+        public TileChange[] changes;
+    }
+
+    [System.Serializable]
     public struct User {
         public int index;
         public string color;
@@ -35,11 +42,23 @@ namespace Response {
     public struct Tile {
         public int i;
         public int v;
+        public int l;
     }
     
     [System.Serializable]
     public struct Pos {
         public int x;
         public int y;
+    }
+
+    [System.Serializable]
+    public struct TileChange
+    {
+        public int x;
+        public int y;
+
+        public int i;
+        public int v;
+        public int l;
     }
 }
