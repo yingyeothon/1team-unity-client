@@ -62,7 +62,7 @@ public class Network : MonoBehaviour {
                 {
                     x = changeResponse.x,
                     y = changeResponse.y,
-                    color = changeResponse.i == -1 ? "#ffffff" : users[changeResponse.i].color,
+                    color = changeResponse.i == -1 ? "#000000" : users[changeResponse.i].color,
                     v = (int) changeResponse.v,
                     l = changeResponse.l,
                 })
