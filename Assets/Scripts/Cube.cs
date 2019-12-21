@@ -3,15 +3,23 @@ using UnityEngine.EventSystems;
 
 public class Cube : MonoBehaviour {
     [SerializeField] Renderer capRenderer = null;
-
+    [SerializeField] int x = 0;
+    [SerializeField] int y = 0;
+    
     TileInfo tileInfo;
+
+    public int X { get => x; set => x = value; }
+    public int Y { get => y; set => y = value; }
+    public TileInfo TileInfo => tileInfo;
     
     void Awake() {
         tileInfo = UserInterface.instance.InstantiateTileInfo(this);
     }
 
     void OnDestroy() {
-        Destroy(tileInfo.gameObject);
+        if (tileInfo != null) {
+            Destroy(tileInfo.gameObject);
+        }
     }
 
     void OnMouseEnter() {
@@ -27,7 +35,10 @@ public class Cube : MonoBehaviour {
     }
 
     void OnMouseDown() {
-        Destroy(gameObject);
+        if (EventSystem.current.IsPointerOverGameObject()) {
+            return;
+        }
+        Network.instance.OnClientClick(X, Y);
     }
 
     private void SetHighlightHeightConditional() {

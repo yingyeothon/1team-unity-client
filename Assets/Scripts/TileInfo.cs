@@ -6,9 +6,9 @@ public class TileInfo : MonoBehaviour {
     [SerializeField] Image image = null;
     [SerializeField] TextMeshProUGUI value = null;
     [SerializeField] TextMeshProUGUI level = null;
-    [SerializeField] Transform tile = null;
-    [SerializeField] RectTransform rectParent = null;
 
+    Transform tile;
+    RectTransform rectParent;
     MainCamera mainCam;
     InterfaceCamera interfaceCam;
 

@@ -73,15 +73,15 @@ public class Network : MonoBehaviour {
         webSocket.Send(JsonConvert.SerializeObject(new Response.LoadRequest()));
 
 
-        UserInterface.instance.OnResultGameScore();
-        UserInterface.instance.OnResultAddEntry("#ff0000", "100");
-        UserInterface.instance.OnResultAddEntry("#00ff00", "50");
-        UserInterface.instance.OnResultAddEntry("#0000ff", "10");
-        UserInterface.instance.OnResultAddEntry("#ff0000", "100");
-        UserInterface.instance.OnResultAddEntry("#00ff00", "50");
-        UserInterface.instance.OnResultAddEntry("#0000ff", "10");
-        UserInterface.instance.OnResultAddEntry("#ff0000", "100");
-        UserInterface.instance.OnResultAddEntry("#00ff00", "50");
-        UserInterface.instance.OnResultAddEntry("#0000ff", "10");
+        // UserInterface.instance.OnResultGameScore();
+        // UserInterface.instance.OnResultAddEntry("#ff0000", "100");
+        // UserInterface.instance.OnResultAddEntry("#00ff00", "50");
+        // UserInterface.instance.OnResultAddEntry("#0000ff", "10");
+        // UserInterface.instance.OnResultAddEntry("#ff0000", "100");
+        // UserInterface.instance.OnResultAddEntry("#00ff00", "50");
+        // UserInterface.instance.OnResultAddEntry("#0000ff", "10");
+        // UserInterface.instance.OnResultAddEntry("#ff0000", "100");
+        // UserInterface.instance.OnResultAddEntry("#00ff00", "50");
+        // UserInterface.instance.OnResultAddEntry("#0000ff", "10");
     }
 }
