@@ -48,6 +48,21 @@ namespace Response {
     }
 
     [System.Serializable]
+    public class LevelUpRequest
+    {
+        public string type = "levelUp";
+        public LevelUpRequestData[] data;
+    }
+
+    [System.Serializable]
+    public class LevelUpRequestData
+    {
+        public int value;
+        public int x;
+        public int y;
+    }
+
+    [System.Serializable]
     public struct User {
         public int index;
         public string color;

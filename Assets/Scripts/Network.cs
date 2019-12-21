@@ -102,6 +102,23 @@ public class Network : MonoBehaviour {
         webSocket.Send(JsonConvert.SerializeObject(clickRequest));
     }
 
+    public void OnClientLevelUp(int x, int y)
+    {
+        var levelUpRequest = new Response.LevelUpRequest()
+        {
+            data = new[]
+            {
+                new Response.LevelUpRequestData()
+                {
+                    value = 1,
+                    x = x,
+                    y = y,
+                }
+            }
+        };
+        webSocket.Send(JsonConvert.SerializeObject(levelUpRequest));
+    }
+
     public void OnLoadButton() {
         webSocket.Send(JsonConvert.SerializeObject(new Response.LoadRequest()));
 
