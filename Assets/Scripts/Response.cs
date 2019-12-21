@@ -18,6 +18,12 @@ namespace Response {
         public string stage;
         public int age;
     }
+    
+    [System.Serializable]
+    public struct EnterResponse {
+        public string type;
+        public User newbie;
+    }
 
     [System.Serializable]
     public class ClickRequest
@@ -73,7 +79,7 @@ namespace Response {
         public int y;
 
         public int i;
-        public int v;
+        public double v;
         public int l;
     }
 

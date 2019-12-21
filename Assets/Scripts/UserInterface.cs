@@ -1,6 +1,5 @@
-﻿using System.Collections.Generic;
-using Response;
-using UnityEngine;
+using System.Collections.Generic;
+﻿using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 using TMPro;
@@ -47,7 +46,7 @@ public class UserInterface : MonoBehaviour {
         playerImage.color = color;
     }
 
-    public void OnTileChanges(TileChange[] tileChanges) {
+    public void OnTileChanges(Command.TileChange[] tileChanges) {
         Debug.Log("OnTileChanges");
 
         foreach (var tc in tileChanges) {

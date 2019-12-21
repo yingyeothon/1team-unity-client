@@ -1,9 +1,13 @@
-﻿using BestHTTP.WebSocket;
+﻿using System.Collections.Generic;
+using System.Linq;
+using BestHTTP.WebSocket;
 using Newtonsoft.Json;
 using UnityEngine;
 
 public class Network : MonoBehaviour {
     WebSocket webSocket;
+
+    private Dictionary<int, Response.User> users = new Dictionary<int, Response.User>();
 
     public static Network instance;
 
@@ -39,12 +43,32 @@ public class Network : MonoBehaviour {
             var loadResponse = JsonConvert.DeserializeObject<Response.LoadResponse>(message);
             Debug.Log(JsonConvert.SerializeObject(loadResponse));
 
+            foreach (var user in loadResponse.users) {
+                users[user.index] = user;
+            }
+
             UserInterface.instance.OnPlayerColorChange(loadResponse.me.color);
+        } else if (message.StartsWith("{\"type\":\"enter\",")) {
+            var enterResponse = JsonConvert.DeserializeObject<Response.EnterResponse>(message);
+            Debug.Log("Enter: " + JsonConvert.SerializeObject(enterResponse));
+
+            users[enterResponse.newbie.index] = enterResponse.newbie;
         } else if (message.StartsWith("{\"type\":\"click\",")) {
             var clickResponse = JsonConvert.DeserializeObject<Response.ClickResponse>(message);
             Debug.Log("ServerClick: " + JsonConvert.SerializeObject(clickResponse));
+            
+            var changeCommands = clickResponse.changes
+                .Select(changeResponse => new Command.TileChange()
+                {
+                    x = changeResponse.x,
+                    y = changeResponse.y,
+                    color = changeResponse.i == -1 ? "#ffffff" : users[changeResponse.i].color,
+                    v = (int) changeResponse.v,
+                    l = changeResponse.l,
+                })
+                .ToArray();
 
-            UserInterface.instance.OnTileChanges(clickResponse.changes);
+            UserInterface.instance.OnTileChanges(changeCommands);
         } else if (message.StartsWith("{\"type\":\"stage\",")) {
             var stage = JsonConvert.DeserializeObject<Response.Stage>(message);
             if (stage.stage == "wait") {
@@ -57,6 +81,8 @@ public class Network : MonoBehaviour {
 
     private void OnWebSocketOpen(WebSocket webSocket) {
         Debug.Log("WebSocket Open!");
+        
+        webSocket.Send(JsonConvert.SerializeObject(new Response.LoadRequest()));
     }
 
     public void OnClientClick(int x, int y)
