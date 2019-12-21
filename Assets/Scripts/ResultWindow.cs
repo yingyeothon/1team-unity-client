@@ -5,8 +5,9 @@ public class ResultWindow : MonoBehaviour {
     [SerializeField] Transform resultEntryParent = null;
 
     public void ClearAll() {
-        while (resultEntryParent.childCount > 0) {
-            DestroyImmediate(resultEntryParent.GetChild(0));
+        var childCount = resultEntryParent.childCount;
+        for (int i = 0; i < childCount; i++) {
+            Destroy(resultEntryParent.GetChild(i).gameObject);
         }
     }
 
@@ -16,6 +17,8 @@ public class ResultWindow : MonoBehaviour {
     }
 
     public void OnCloseButton() {
-        UserInterface.instance.onResultWindowClose();
+        if (UserInterface.instance.onResultWindowClose != null) {
+            UserInterface.instance.onResultWindowClose();
+        }
     }
 }

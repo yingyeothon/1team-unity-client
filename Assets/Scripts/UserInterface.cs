@@ -14,7 +14,7 @@ public class UserInterface : MonoBehaviour {
     public void Awake() {
         instance = this;
 
-        onResultWindowClose += TestFunc;
+        //onResultWindowClose += TestFunc;
     }
 
     void TestFunc() {
