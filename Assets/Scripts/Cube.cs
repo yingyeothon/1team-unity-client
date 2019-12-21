@@ -1,10 +1,12 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.EventSystems;
 
 public class Cube : MonoBehaviour {
     [SerializeField] Renderer capRenderer = null;
     [SerializeField] int x = 0;
     [SerializeField] int y = 0;
+    [SerializeField] Renderer renderer = null;
     
     TileInfo tileInfo;
 
@@ -14,6 +16,7 @@ public class Cube : MonoBehaviour {
     
     void Awake() {
         tileInfo = UserInterface.instance.InstantiateTileInfo(this);
+
     }
 
     void OnDestroy() {
@@ -57,5 +60,10 @@ public class Cube : MonoBehaviour {
     void SetDefaultHeight() {
         capRenderer.enabled = false;
         //transform.localPosition = new Vector3(transform.localPosition.x, -0.4f, transform.localPosition.z);
+    }
+
+    internal void SetColor(string v) {
+        ColorUtility.TryParseHtmlString(v, out var color);
+        renderer.material.SetColor("_Color", color);
     }
 }
