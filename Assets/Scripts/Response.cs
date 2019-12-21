@@ -24,6 +24,12 @@ namespace Response {
         public string type;
         public User newbie;
     }
+    
+    [System.Serializable]
+    public struct EndResponse {
+        public string type;
+        public GameScore score;
+    }
 
     [System.Serializable]
     public class ClickRequest

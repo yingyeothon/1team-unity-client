@@ -76,6 +76,15 @@ public class Network : MonoBehaviour {
             } else if (stage.stage == "running") {
                 UserInterface.instance.OnRunning(stage.age);
             }
+        } else if (message.StartsWith("{\"type\":\"end\",")) {
+            var endResponse = JsonConvert.DeserializeObject<Response.EndResponse>(message);
+
+            UserInterface.instance.OnResultGameScore();
+
+            foreach (var kv in endResponse.score)
+            {
+                UserInterface.instance.OnResultAddEntry(users[kv.Key].color, kv.Value.power.ToString());
+            }
         }
     }
 
@@ -121,17 +130,5 @@ public class Network : MonoBehaviour {
 
     public void OnLoadButton() {
         webSocket.Send(JsonConvert.SerializeObject(new Response.LoadRequest()));
-
-
-        // UserInterface.instance.OnResultGameScore();
-        // UserInterface.instance.OnResultAddEntry("#ff0000", "100");
-        // UserInterface.instance.OnResultAddEntry("#00ff00", "50");
-        // UserInterface.instance.OnResultAddEntry("#0000ff", "10");
-        // UserInterface.instance.OnResultAddEntry("#ff0000", "100");
-        // UserInterface.instance.OnResultAddEntry("#00ff00", "50");
-        // UserInterface.instance.OnResultAddEntry("#0000ff", "10");
-        // UserInterface.instance.OnResultAddEntry("#ff0000", "100");
-        // UserInterface.instance.OnResultAddEntry("#00ff00", "50");
-        // UserInterface.instance.OnResultAddEntry("#0000ff", "10");
     }
 }
