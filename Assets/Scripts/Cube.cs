@@ -41,7 +41,19 @@ public class Cube : MonoBehaviour {
         if (EventSystem.current.IsPointerOverGameObject()) {
             return;
         }
-        Network.instance.OnClientClick(X, Y);
+        if (TileInfo.Level == 0 && TileInfo.Value >= 10) {
+            Network.instance.OnClientLevelUp(X, Y);
+        } else if (TileInfo.Level == 1 && TileInfo.Value >= 25) {
+            Network.instance.OnClientLevelUp(X, Y);
+        } else if (TileInfo.Level == 2 && TileInfo.Value >= 35) {
+            Network.instance.OnClientLevelUp(X, Y);
+        } else if (TileInfo.Level == 3 && TileInfo.Value >= 40) {
+            Network.instance.OnClientLevelUp(X, Y);
+        } else if (TileInfo.Level == 4 && TileInfo.Value >= 50) {
+            Network.instance.OnClientLevelUp(X, Y);
+        } else {
+            Network.instance.OnClientClick(X, Y);
+        }
     }
 
     private void SetHighlightHeightConditional() {

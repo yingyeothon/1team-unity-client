@@ -17,6 +17,9 @@ public class TileInfo : MonoBehaviour {
         set => tile = value;
     }
 
+    public int Value => int.Parse(value.text);
+    public int Level => int.Parse(level.text);
+
     void Awake() {
         InitBind();
     }
@@ -32,6 +35,7 @@ public class TileInfo : MonoBehaviour {
         image.color = c;
         value.text = v;
         level.text = l;
+
     }
 
     void LateUpdate() {
