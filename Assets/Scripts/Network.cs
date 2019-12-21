@@ -40,11 +40,33 @@ public class Network : MonoBehaviour {
             Debug.Log(JsonConvert.SerializeObject(loadResponse));
 
             UserInterface.instance.OnPlayerColorChange(loadResponse.me.color);
+        } else if (message.StartsWith("{\"type\":\"click\",")) {
+            var clickResponse = JsonConvert.DeserializeObject<Response.ClickResponse>(message);
+            Debug.Log("ServerClick: " + JsonConvert.SerializeObject(clickResponse));
+
+            UserInterface.instance.OnTileChanges(clickResponse.changes);
         }
     }
 
     private void OnWebSocketOpen(WebSocket webSocket) {
         Debug.Log("WebSocket Open!");
+    }
+
+    public void OnClientClick(int x, int y)
+    {
+        var clickRequest = new Response.ClickRequest()
+        {
+            data = new[]
+            {
+                new Response.ClickRequestData
+                {
+                    value = 1,
+                    x = x,
+                    y = y,
+                }
+            }
+        };
+        webSocket.Send(JsonConvert.SerializeObject(clickRequest));
     }
 
     public void OnLoadButton() {

@@ -20,6 +20,21 @@ namespace Response {
     }
 
     [System.Serializable]
+    public class ClickRequest
+    {
+        public string type = "click";
+        public ClickRequestData[] data;
+    }
+
+    [System.Serializable]
+    public class ClickRequestData
+    {
+        public int value;
+        public int x;
+        public int y;
+    }
+
+    [System.Serializable]
     public struct ClickResponse
     {
         public string type;
