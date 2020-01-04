@@ -13,7 +13,7 @@ public class UserInterface : MonoBehaviour {
     [SerializeField] Transform waitWindow = null;
     [SerializeField] TextMeshProUGUI waitText = null;
     [SerializeField] TextMeshProUGUI runningTimeText = null;
-    
+
     public static UserInterface instance;
 
     Dictionary<System.Tuple<int, int>, Cube> cubeDict = new Dictionary<System.Tuple<int, int>, Cube>();
@@ -40,7 +40,7 @@ public class UserInterface : MonoBehaviour {
     void TestFunc() {
         Debug.Log("Test Func");
     }
-    
+
     public void OnPlayerColorChange(string playerColor) {
         ColorUtility.TryParseHtmlString(playerColor, out var color);
         playerImage.color = color;

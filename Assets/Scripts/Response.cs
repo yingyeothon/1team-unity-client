@@ -18,13 +18,13 @@ namespace Response {
         public string stage;
         public int age;
     }
-    
+
     [System.Serializable]
     public struct EnterResponse {
         public string type;
         public User newbie;
     }
-    
+
     [System.Serializable]
     public struct EndResponse {
         public string type;
@@ -32,37 +32,32 @@ namespace Response {
     }
 
     [System.Serializable]
-    public class ClickRequest
-    {
+    public class ClickRequest {
         public string type = "click";
         public ClickRequestData[] data;
     }
 
     [System.Serializable]
-    public class ClickRequestData
-    {
+    public class ClickRequestData {
         public int value;
         public int x;
         public int y;
     }
 
     [System.Serializable]
-    public struct ClickResponse
-    {
+    public struct ClickResponse {
         public string type;
         public TileChange[] changes;
     }
 
     [System.Serializable]
-    public class LevelUpRequest
-    {
+    public class LevelUpRequest {
         public string type = "levelUp";
         public LevelUpRequestData[] data;
     }
 
     [System.Serializable]
-    public class LevelUpRequestData
-    {
+    public class LevelUpRequestData {
         public int value;
         public int x;
         public int y;
@@ -86,7 +81,7 @@ namespace Response {
         public int v;
         public int l;
     }
-    
+
     [System.Serializable]
     public struct Pos {
         public int x;
@@ -94,8 +89,7 @@ namespace Response {
     }
 
     [System.Serializable]
-    public struct TileChange
-    {
+    public struct TileChange {
         public int x;
         public int y;
 
@@ -105,10 +99,10 @@ namespace Response {
     }
 
     [System.Serializable]
-    public struct Stage
-    {
+    public struct Stage {
         public string type;
         public string stage;
         public int age;
     }
+
 }

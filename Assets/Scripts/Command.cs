@@ -1,7 +1,6 @@
-﻿namespace Command
-{
-    public struct TileChange
-    {
+﻿namespace Command {
+
+    public struct TileChange {
         public int x;
         public int y;
 
@@ -9,4 +8,5 @@
         public int v;
         public int l;
     }
+
 }
