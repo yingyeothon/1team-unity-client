@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class UserInterface : MonoBehaviour {
     [SerializeField] Image playerImage = null;
@@ -30,11 +31,13 @@ public class UserInterface : MonoBehaviour {
     }
 
     public UnityAction onResultWindowClose;
+    public UnityAction onResultWindowRestart;
 
     public void Awake() {
         instance = this;
 
         //onResultWindowClose += TestFunc;
+        onResultWindowRestart += RestartGame;
     }
 
     void TestFunc() {
@@ -77,5 +80,10 @@ public class UserInterface : MonoBehaviour {
         waitWindow.gameObject.SetActive(false);
         resultWindow.gameObject.SetActive(false);
         runningTimeText.text = $"{age} sec";
+    }
+
+    private static void RestartGame() {
+        var loadedLevel = SceneManager.GetActiveScene();
+        SceneManager.LoadScene(loadedLevel.buildIndex);
     }
 }
