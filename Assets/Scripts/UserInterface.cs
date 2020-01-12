@@ -55,7 +55,7 @@ public class UserInterface : MonoBehaviour {
         foreach (var tc in tileChanges) {
             var xy = new System.Tuple<int, int>(tc.x, tc.y);
             var cube = cubeDict[xy];
-            cube.TileInfo.SetData(tc.color, tc.v.ToString(), tc.l.ToString());
+            cube.TileInfo.SetData(tc.color, tc.v.ToString(), tc.l.ToString(), tc.p ? "!" : "");
             cube.SetColor(tc.color);
         }
     }

@@ -7,6 +7,7 @@
         public string color;
         public int v;
         public int l;
+        public bool p;
     }
 
 }
