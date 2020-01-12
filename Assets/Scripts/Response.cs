@@ -94,8 +94,9 @@ namespace Response {
         public int y;
 
         public int i;
-        public double v;
+        public int v;
         public int l;
+        public bool p;
     }
 
     [System.Serializable]

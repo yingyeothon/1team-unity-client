@@ -66,6 +66,7 @@ public class Network : MonoBehaviour {
                     color = changeResponse.i == -1 ? "#000000" : users[changeResponse.i].color,
                     v = (int) changeResponse.v,
                     l = changeResponse.l,
+                    p = changeResponse.p,
                 })
                 .ToArray();
 

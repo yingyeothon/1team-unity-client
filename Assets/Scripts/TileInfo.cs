@@ -6,6 +6,7 @@ public class TileInfo : MonoBehaviour {
     [SerializeField] Image image = null;
     [SerializeField] TextMeshProUGUI value = null;
     [SerializeField] TextMeshProUGUI level = null;
+    [SerializeField] TextMeshProUGUI levelUpPossible = null;
 
     Transform tile;
     RectTransform rectParent;
@@ -17,8 +18,7 @@ public class TileInfo : MonoBehaviour {
         set => tile = value;
     }
 
-    public int Value => int.Parse(value.text);
-    public int Level => int.Parse(level.text);
+    public bool LevelUpPossible => levelUpPossible.text.Equals("!");
 
     void Awake() {
         InitBind();
@@ -29,13 +29,13 @@ public class TileInfo : MonoBehaviour {
         interfaceCam = GameObject.FindObjectOfType<InterfaceCamera>();
         rectParent = transform.parent.GetComponent<RectTransform>();
     }
-    
-    public void SetData(string color, string v, string l) {
+
+    public void SetData(string color, string v, string l, string p) {
         ColorUtility.TryParseHtmlString(color, out var c);
         image.color = c;
         value.text = v;
         level.text = l;
-
+        levelUpPossible.text = p;
     }
 
     void LateUpdate() {

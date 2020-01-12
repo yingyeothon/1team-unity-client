@@ -21,4 +21,10 @@ public class ResultWindow : MonoBehaviour {
             UserInterface.instance.onResultWindowClose();
         }
     }
+
+    public void OnRestartButton() {
+        if (UserInterface.instance.onResultWindowRestart != null) {
+            UserInterface.instance.onResultWindowRestart();
+        }
+    }
 }

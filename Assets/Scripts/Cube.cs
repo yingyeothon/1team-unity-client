@@ -7,13 +7,13 @@ public class Cube : MonoBehaviour {
     [SerializeField] int x = 0;
     [SerializeField] int y = 0;
     [SerializeField] Renderer cubeRenderer = null;
-    
+
     TileInfo tileInfo;
 
     public int X { get => x; set => x = value; }
     public int Y { get => y; set => y = value; }
     public TileInfo TileInfo => tileInfo;
-    
+
     void Awake() {
         tileInfo = UserInterface.instance.InstantiateTileInfo(this);
 
@@ -41,15 +41,7 @@ public class Cube : MonoBehaviour {
         if (EventSystem.current.IsPointerOverGameObject()) {
             return;
         }
-        if (TileInfo.Level == 0 && TileInfo.Value >= 10) {
-            Network.instance.OnClientLevelUp(X, Y);
-        } else if (TileInfo.Level == 1 && TileInfo.Value >= 25) {
-            Network.instance.OnClientLevelUp(X, Y);
-        } else if (TileInfo.Level == 2 && TileInfo.Value >= 35) {
-            Network.instance.OnClientLevelUp(X, Y);
-        } else if (TileInfo.Level == 3 && TileInfo.Value >= 40) {
-            Network.instance.OnClientLevelUp(X, Y);
-        } else if (TileInfo.Level == 4 && TileInfo.Value >= 50) {
+        if (TileInfo.LevelUpPossible) {
             Network.instance.OnClientLevelUp(X, Y);
         } else {
             Network.instance.OnClientClick(X, Y);
