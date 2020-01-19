@@ -5,6 +5,14 @@ namespace Response {
     using GameScore = Dictionary<int, GameScoreValue>;
 
     [System.Serializable]
+    public class MatchInfo {
+        public string type;
+        public string url;
+        public string gameId;
+        public string playerId;
+    }
+
+    [System.Serializable]
     public class LoadRequest {
         public string type = "load";
     }

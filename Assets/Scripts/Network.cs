@@ -11,12 +11,16 @@ public class Network : MonoBehaviour {
 
     public static Network instance;
 
+    public Response.MatchInfo MatchInfo { get; set; }
+
     void Awake() {
         instance = this;
     }
 
     void Start() {
-        webSocket = new WebSocket(new System.Uri("wss://8tl0tknp30.execute-api.ap-northeast-2.amazonaws.com/dev"));
+        webSocket = new WebSocket(new System.Uri(MatchInfo.url + "?"));
+        webSocket.InternalRequest.AddHeader("x-game-id", MatchInfo.gameId);
+        webSocket.InternalRequest.AddHeader("x-member-id", MatchInfo.playerId);
         webSocket.OnOpen += OnWebSocketOpen;
         webSocket.OnMessage += OnMessageReceived;
         webSocket.OnBinary += OnBinaryMessageReceived;

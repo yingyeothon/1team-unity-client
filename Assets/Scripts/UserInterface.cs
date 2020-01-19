@@ -78,10 +78,22 @@ public class UserInterface : MonoBehaviour {
         resultWindow.AddEntry(color, score);
     }
 
+    public void OnLoggingIn() {
+        waitWindow.gameObject.SetActive(true);
+        resultWindow.gameObject.SetActive(false);
+        waitText.text = $"Logging in...";
+    }
+
+    public void OnMatching() {
+        waitWindow.gameObject.SetActive(true);
+        resultWindow.gameObject.SetActive(false);
+        waitText.text = $"Matching...";
+    }
+
     public void OnWait(int age) {
         waitWindow.gameObject.SetActive(true);
         resultWindow.gameObject.SetActive(false);
-        waitText.text = $"Please Wait...{age}";
+        waitText.text = $"Waiting other players...{age}";
     }
 
     public void OnRunning(int age) {
