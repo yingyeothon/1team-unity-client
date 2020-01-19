@@ -18,6 +18,7 @@ public class UserInterface : MonoBehaviour {
     public static UserInterface instance;
 
     Dictionary<System.Tuple<int, int>, Cube> cubeDict = new Dictionary<System.Tuple<int, int>, Cube>();
+    private string playerColor;
 
     internal TileInfo InstantiateTileInfo(Cube cube) {
         var tileInfo = Instantiate(tileInfoPrefab, tileInfoGroup).GetComponent<TileInfo>();
@@ -45,6 +46,8 @@ public class UserInterface : MonoBehaviour {
     }
 
     public void OnPlayerColorChange(string playerColor) {
+        this.playerColor = playerColor;
+
         ColorUtility.TryParseHtmlString(playerColor, out var color);
         playerImage.color = color;
     }
@@ -55,7 +58,12 @@ public class UserInterface : MonoBehaviour {
         foreach (var tc in tileChanges) {
             var xy = new System.Tuple<int, int>(tc.x, tc.y);
             var cube = cubeDict[xy];
-            cube.TileInfo.SetData(tc.color, tc.v.ToString(), tc.l.ToString(), tc.p ? "!" : "");
+            cube.TileInfo.SetData(
+                tc.color,
+                tc.v.ToString(),
+                tc.l.ToString(),
+                tc.color.Equals(playerColor) && tc.p ? "!" : ""
+            );
             cube.SetColor(tc.color);
         }
     }
