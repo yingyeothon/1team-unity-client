@@ -3612,7 +3612,7 @@ Camera:
   far clip plane: 50
   field of view: 60
   orthographic: 1
-  orthographic size: 6.0389824
+  orthographic size: 6.038982
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -12001,32 +12001,62 @@ PrefabInstance:
     - target: {fileID: 873907492547021953, guid: 49cea1905a865da4fab90747488f4c6e,
         type: 3}
       propertyPath: m_textInfo.characterCount
-      value: 0
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 873907492547021953, guid: 49cea1905a865da4fab90747488f4c6e,
         type: 3}
       propertyPath: m_textInfo.spaceCount
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 873907492547021953, guid: 49cea1905a865da4fab90747488f4c6e,
         type: 3}
       propertyPath: m_textInfo.wordCount
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 873907492547021953, guid: 49cea1905a865da4fab90747488f4c6e,
         type: 3}
       propertyPath: m_textInfo.lineCount
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 873907492547021953, guid: 49cea1905a865da4fab90747488f4c6e,
         type: 3}
       propertyPath: m_textInfo.pageCount
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 873907492547021953, guid: 49cea1905a865da4fab90747488f4c6e,
+        type: 3}
+      propertyPath: m_text
+      value: 0 sec
+      objectReference: {fileID: 0}
+    - target: {fileID: 875661490854523351, guid: 49cea1905a865da4fab90747488f4c6e,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -10
       objectReference: {fileID: 0}
     - target: {fileID: 2631680283896723718, guid: 49cea1905a865da4fab90747488f4c6e,
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -441.09998
+      objectReference: {fileID: 0}
+    - target: {fileID: 3886267339522227547, guid: 49cea1905a865da4fab90747488f4c6e,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4685316404152433339, guid: 49cea1905a865da4fab90747488f4c6e,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4685316404152433339, guid: 49cea1905a865da4fab90747488f4c6e,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 290
+      objectReference: {fileID: 0}
+    - target: {fileID: 4685316404506123213, guid: 49cea1905a865da4fab90747488f4c6e,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -35
       objectReference: {fileID: 0}
     - target: {fileID: 4685316404697276434, guid: 49cea1905a865da4fab90747488f4c6e,
         type: 3}
