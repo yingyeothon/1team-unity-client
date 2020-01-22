@@ -104,7 +104,7 @@ public class Network : MonoBehaviour {
 
     public void OnClientClick(int x, int y) {
         var clickRequest = new Response.ClickRequest() {
-            data = new[] {
+            data = new List<Response.ClickRequestData>() {
                 new Response.ClickRequestData {
                     value = 1,
                     x = x,
@@ -117,7 +117,7 @@ public class Network : MonoBehaviour {
 
     public void OnClientLevelUp(int x, int y) {
         var levelUpRequest = new Response.LevelUpRequest() {
-            data = new[] {
+            data = new List<Response.LevelUpRequestData>() {
                 new Response.LevelUpRequestData() {
                     value = 1,
                     x = x,

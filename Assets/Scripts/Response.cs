@@ -21,8 +21,8 @@ namespace Response {
     public struct LoadResponse {
         public string type;
         public User me;
-        public User[] users;
-        public Tile[][] board;
+        public List<User> users;
+        public List<List<Tile>> board;
         public string stage;
         public int age;
     }
@@ -42,7 +42,7 @@ namespace Response {
     [System.Serializable]
     public class ClickRequest {
         public string type = "click";
-        public ClickRequestData[] data;
+        public List<ClickRequestData> data;
     }
 
     [System.Serializable]
@@ -55,13 +55,13 @@ namespace Response {
     [System.Serializable]
     public struct ClickResponse {
         public string type;
-        public TileChange[] changes;
+        public List<TileChange> changes;
     }
 
     [System.Serializable]
     public class LevelUpRequest {
         public string type = "levelUp";
-        public LevelUpRequestData[] data;
+        public List<LevelUpRequestData> data;
     }
 
     [System.Serializable]
