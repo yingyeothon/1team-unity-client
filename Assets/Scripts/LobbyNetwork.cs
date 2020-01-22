@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.Collections;
+using System.Text;
 using BestHTTP;
 using BestHTTP.WebSocket;
 using Newtonsoft.Json;
@@ -13,6 +14,12 @@ public class LobbyNetwork : MonoBehaviour {
         UserInterface.instance.OnLoggingIn();
 
         RequestAuth();
+    }
+
+    private IEnumerator WaitAndRestart() {
+        yield return new WaitForSeconds(1);
+
+        Start();
     }
 
     private void RequestAuth() {
@@ -51,8 +58,16 @@ public class LobbyNetwork : MonoBehaviour {
         };
 
         webSocket.OnMessage += delegate(WebSocket socket, string message) {
+            socket.Close();
+
             var matchResponse = JsonConvert.DeserializeObject<Response.MatchInfo>(message);
             OnMatchFinished(matchResponse);
+        };
+
+        webSocket.OnError += delegate(WebSocket socket, string error) {
+            Debug.Log("Error: " + error);
+
+            StartCoroutine(WaitAndRestart());
         };
 
         webSocket.Open();

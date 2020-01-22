@@ -31,6 +31,8 @@ public class Network : MonoBehaviour {
 
     void OnError(WebSocket ws, string error) {
         Debug.Log("Error: " + error);
+
+        UserInterface.RestartGame();
     }
 
     private void OnWebSocketClosed(WebSocket webSocket, System.UInt16 code, string message) {
@@ -93,6 +95,8 @@ public class Network : MonoBehaviour {
             foreach (var kv in endResponse.score) {
                 UserInterface.instance.OnResultAddEntry(users[kv.Key].color, kv.Value.power.ToString());
             }
+
+            webSocket.Close();
         }
     }
 

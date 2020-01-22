@@ -102,7 +102,7 @@ public class UserInterface : MonoBehaviour {
         runningTimeText.text = $"{age} sec";
     }
 
-    private static void RestartGame() {
+    public static void RestartGame() {
         var loadedLevel = SceneManager.GetActiveScene();
         SceneManager.LoadScene(loadedLevel.buildIndex);
     }
