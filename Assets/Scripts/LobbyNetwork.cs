@@ -42,8 +42,7 @@ public class LobbyNetwork : MonoBehaviour {
     }
 
     private void RequestMatch(string authToken) {
-        var webSocket = new WebSocket(new System.Uri("wss://ws.yyt.life/lobby"));
-        webSocket.InternalRequest.SetHeader("Authorization", $"Bearer {authToken}");
+        var webSocket = new WebSocket(new System.Uri($"wss://ws.yyt.life/lobby?authorization={authToken}"));
 
         webSocket.OnOpen += delegate(WebSocket socket) {
             Debug.Log("Lobby Socket Open");

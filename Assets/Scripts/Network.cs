@@ -18,9 +18,7 @@ public class Network : MonoBehaviour {
     }
 
     void Start() {
-        webSocket = new WebSocket(new System.Uri(MatchInfo.url + "?"));
-        webSocket.InternalRequest.AddHeader("x-game-id", MatchInfo.gameId);
-        webSocket.InternalRequest.AddHeader("x-member-id", MatchInfo.playerId);
+        webSocket = new WebSocket(new System.Uri($"{MatchInfo.url}?x-game-id={MatchInfo.gameId}&x-member-id={MatchInfo.playerId}"));
         webSocket.OnOpen += OnWebSocketOpen;
         webSocket.OnMessage += OnMessageReceived;
         webSocket.OnBinary += OnBinaryMessageReceived;
