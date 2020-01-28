@@ -5,15 +5,16 @@ public class ResultWindow : MonoBehaviour {
     [SerializeField] Transform resultEntryParent = null;
 
     public void ClearAll() {
-        var childCount = resultEntryParent.childCount;
-        for (int i = 0; i < childCount; i++) {
-            Destroy(resultEntryParent.GetChild(i).gameObject);
+        while (resultEntryParent.childCount > 0) {
+            var child = resultEntryParent.GetChild(0);
+            child.SetParent(null);
+            Destroy(child.gameObject);
         }
     }
 
     public void AddEntry(string color, string score) {
         var resultEntry = Instantiate(resultEntryPrefab, resultEntryParent).GetComponent<ResultEntry>();
-        resultEntry.SetData($"#{resultEntryParent.childCount + 1}", color, score);
+        resultEntry.SetData($"#{resultEntryParent.childCount}", color, score);
     }
 
     public void OnCloseButton() {

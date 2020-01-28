@@ -90,7 +90,9 @@ public class Network : MonoBehaviour {
 
             UserInterface.instance.OnResultGameScore();
 
-            foreach (var kv in endResponse.score) {
+            var scores = endResponse.score.ToList();
+            scores.Sort((a, b) => b.Value.power.CompareTo(a.Value.power));
+            foreach (var kv in scores) {
                 UserInterface.instance.OnResultAddEntry(users[kv.Key].color, kv.Value.power.ToString());
             }
 
