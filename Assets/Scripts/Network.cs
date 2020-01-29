@@ -18,6 +18,8 @@ public class Network : MonoBehaviour {
     public AudioClip endClip;
     public AudioSource sharedAudioSource;
 
+    public GameObject flameGroup;
+
     void Awake() {
         instance = this;
     }
@@ -88,6 +90,8 @@ public class Network : MonoBehaviour {
             }
             else if (stage.stage == "running") {
                 UserInterface.instance.OnRunning(stage.age);
+
+                flameGroup.SetActive(true);
             }
         }
         else if (message.StartsWith("{\"type\":\"end\",")) {
