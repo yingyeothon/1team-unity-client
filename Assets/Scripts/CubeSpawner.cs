@@ -3,10 +3,13 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class CubeSpawner : MonoBehaviour {
+#if UNITY_EDITOR
     [SerializeField] GameObject cubePrefab = null;
     [SerializeField] Transform cubeGroup = null;
+#endif
     // [SerializeField] GameObject tileInfoPrefab = null;
     // [SerializeField] Transform tileInfoGroup = null;
+
 
 #if UNITY_EDITOR
     [ContextMenu("Spawn All Cubes")]
@@ -15,12 +18,14 @@ public class CubeSpawner : MonoBehaviour {
             DestroyImmediate(cubeGroup.GetChild(0).gameObject);
         }
 
-        for (int i = -5; i <= 5; i++) {
-            for (int j = -5; j <= 5; j++) {
+        var extent = 2;
+
+        for (int i = -extent; i <= extent; i++) {
+            for (int j = -extent; j <= extent; j++) {
                 var cube = (UnityEditor.PrefabUtility.InstantiatePrefab(cubePrefab, cubeGroup) as GameObject).GetComponent<Cube>();
                 cube.transform.localPosition = new Vector3(i, -0.4f, j);
-                cube.X = i + 5;
-                cube.Y = j + 5;
+                cube.X = i + extent;
+                cube.Y = j + extent;
                 // var cube = Instantiate(cubePrefab, new Vector3(i, -0.4f, j), Quaternion.identity, cubeGroup);
                 cube.name = $"Cube [{i}, {j}]";
 
