@@ -6,6 +6,7 @@ public class MainCamera : MonoBehaviour {
     Camera mainCamera;
     public Camera Cam => mainCamera;
     GameObject cubeGroup;
+    public AudioSource bgmAudioSource;
 
     void Awake() {
         InitReferences();
@@ -63,5 +64,13 @@ public class MainCamera : MonoBehaviour {
         }
 
         return Vector3.zero;
+    }
+
+    public void ToggleBgm() {
+        if (bgmAudioSource.isPlaying) {
+            bgmAudioSource.Stop();
+        } else {
+            bgmAudioSource.Play();
+        }
     }
 }

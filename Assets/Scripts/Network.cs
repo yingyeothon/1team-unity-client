@@ -13,6 +13,11 @@ public class Network : MonoBehaviour {
 
     public Response.MatchInfo MatchInfo { get; set; }
 
+    public AudioClip clickClip;
+    public AudioClip upgradeClip;
+    public AudioClip endClip;
+    public AudioSource sharedAudioSource;
+
     void Awake() {
         instance = this;
     }
@@ -97,6 +102,8 @@ public class Network : MonoBehaviour {
             }
 
             webSocket.Close();
+
+            sharedAudioSource.PlayOneShot(endClip);
         }
     }
 

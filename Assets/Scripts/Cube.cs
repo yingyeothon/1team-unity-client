@@ -43,9 +43,12 @@ public class Cube : MonoBehaviour {
         }
         if (TileInfo.LevelUpPossible) {
             Network.instance.OnClientLevelUp(X, Y);
+            Network.instance.sharedAudioSource.PlayOneShot(Network.instance.upgradeClip);
         } else {
             Network.instance.OnClientClick(X, Y);
         }
+        
+        Network.instance.sharedAudioSource.PlayOneShot(Network.instance.clickClip);
     }
 
     private void SetHighlightHeightConditional() {
