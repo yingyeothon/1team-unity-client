@@ -8,6 +8,11 @@
         public int v;
         public int l;
         public bool p;
+
+        public int defence;
+        public int offence;
+        public int productivity;
+        public int attackRange;
     }
 
 }
