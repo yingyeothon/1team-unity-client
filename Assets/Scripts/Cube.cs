@@ -74,12 +74,11 @@ public class Cube : MonoBehaviour {
             return;
         }
 
-        
-
-
-        //if (IsMine) {
-        UserInterface.instance.OpenPurchaseWindow(this);
-        //}
+        if (IsMine) {
+            UserInterface.instance.OpenUpgradeWindow(this);
+        } else if (Color == Color.white || Color == Color.black) {
+            UserInterface.instance.OpenPurchaseWindow(this);
+        }
     }
 
     void OnMouseDrag() {
