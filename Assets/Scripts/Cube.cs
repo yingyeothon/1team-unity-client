@@ -67,6 +67,7 @@ public class Cube : MonoBehaviour {
         if (this != LastOverCube) {
             Debug.Log($"Drag: {this} --> {LastOverCube}");
             //Network.instance.
+            Network.instance.Attack(X, Y, LastOverCube.X, LastOverCube.Y);
             return;
         }
 
