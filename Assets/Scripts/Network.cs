@@ -130,7 +130,7 @@ public class Network : MonoBehaviour {
             UserInterface.instance.OnResultGameScore();
 
             var scores = endResponse.score.ToList();
-            scores.Sort((a, b) => b.Value.power.CompareTo(a.Value.power));
+            scores.Sort((a, b) => b.Value.tile.CompareTo(a.Value.tile));
             foreach (var kv in scores) {
                 UserInterface.instance.OnResultAddEntry(users[kv.Key].color, kv.Value.tile.ToString());
             }
