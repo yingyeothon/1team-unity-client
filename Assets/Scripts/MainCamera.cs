@@ -7,6 +7,7 @@ public class MainCamera : MonoBehaviour {
     public Camera Cam => mainCamera;
     GameObject cubeGroup;
     public AudioSource bgmAudioSource;
+    [SerializeField] float margin = 2.0f;
 
     void Awake() {
         InitReferences();
@@ -43,7 +44,6 @@ public class MainCamera : MonoBehaviour {
 
         var firstCube = cubeGroup.transform.GetChild(0);
         var lastCube = cubeGroup.transform.GetChild(cubeGroup.transform.childCount - 1);
-        var margin = 2;
         var cubeDist = margin + Vector3.Distance(firstCube.transform.position, lastCube.transform.position);
 
         if (camDist != 0 && cubeDist != 0) {
