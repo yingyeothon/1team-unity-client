@@ -161,6 +161,7 @@ public class UserInterface : MonoBehaviour {
         var y = lastSelectedCube.Y;
         Network.instance.UpgradeOffence(x, y);
         upgradeWindow.gameObject.SetActive(false);
+        Network.instance.sharedAudioSource.PlayOneShot(Network.instance.upgradeClip);
     }
 
     public void UpgradeDefence() {
@@ -168,6 +169,7 @@ public class UserInterface : MonoBehaviour {
         var y = lastSelectedCube.Y;
         Network.instance.UpgradeDefence(x, y);
         upgradeWindow.gameObject.SetActive(false);
+        Network.instance.sharedAudioSource.PlayOneShot(Network.instance.upgradeClip);
     }
 
     public void UpgradeProductivity() {
@@ -175,6 +177,7 @@ public class UserInterface : MonoBehaviour {
         var y = lastSelectedCube.Y;
         Network.instance.UpgradeProductivity(x, y);
         upgradeWindow.gameObject.SetActive(false);
+        Network.instance.sharedAudioSource.PlayOneShot(Network.instance.upgradeClip);
     }
 
     public void UpgradeAttackRange() {
@@ -182,6 +185,7 @@ public class UserInterface : MonoBehaviour {
         var y = lastSelectedCube.Y;
         Network.instance.UpgradeAttackRange(x, y);
         upgradeWindow.gameObject.SetActive(false);
+        Network.instance.sharedAudioSource.PlayOneShot(Network.instance.upgradeClip);
     }
 
     public void ConquerCell() {
@@ -189,6 +193,7 @@ public class UserInterface : MonoBehaviour {
         var y = lastSelectedCube.Y;
         Network.instance.ConquerCell(x, y);
         purchaseWindow.gameObject.SetActive(false);
+        Network.instance.sharedAudioSource.PlayOneShot(Network.instance.upgradeClip);
     }
 
     public void CancelUpgrade() {
