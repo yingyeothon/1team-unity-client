@@ -17,7 +17,9 @@ public class UserInterface : MonoBehaviour {
     [SerializeField] TextMeshProUGUI runningTimeText = null;
     [SerializeField] TextMeshProUGUI myCellCount = null;
     [SerializeField] TextMeshProUGUI yourCellCount = null;
-
+    [SerializeField] GameObject upgradeWindow = null;
+    [SerializeField] GameObject purchaseWindow = null;
+    
     public static UserInterface instance;
 
     Dictionary<System.Tuple<int, int>, Cube> cubeDict = new Dictionary<System.Tuple<int, int>, Cube>();
@@ -124,5 +126,33 @@ public class UserInterface : MonoBehaviour {
     public static void RestartGame() {
         var loadedLevel = SceneManager.GetActiveScene();
         SceneManager.LoadScene(loadedLevel.buildIndex);
+    }
+
+    public void UpgradeOffence() {
+
+    }
+
+    public void UpgradeDefence() {
+
+    }
+
+    public void UpgradeProductivity() {
+
+    }
+
+    public void UpgradeAttackRange() {
+
+    }
+
+    public void ConquerCell() {
+
+    }
+
+    public void CancelUpgrade() {
+        upgradeWindow.gameObject.SetActive(false);
+    }
+
+    public void CancelPurchase() {
+        purchaseWindow.gameObject.SetActive(false);
     }
 }
