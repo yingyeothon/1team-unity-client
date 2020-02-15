@@ -56,12 +56,28 @@ public class Cube : MonoBehaviour {
     }
 
     void OnMouseUp() {
+        DragIndicator.instance.EnableRenderer = false;
         if (EventSystem.current.IsPointerOverGameObject()) {
             return;
         }
         //if (IsMine) {
             UserInterface.instance.OpenPurchaseWindow(this);
         //}
+    }
+
+    void OnMouseDrag() {
+        if (EventSystem.current.IsPointerOverGameObject()) {
+            return;
+        }
+
+        var ray = MainCamera.instance.Cam.ScreenPointToRay(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0));
+        var plane = new Plane(Vector3.up, Vector3.zero);
+
+        if (plane.Raycast(ray, out var distance)) {
+            var point = ray.GetPoint(distance);
+            DragIndicator.instance.transform.position = point;
+            DragIndicator.instance.EnableRenderer = true;
+        }
     }
 
     private void SetHighlightHeightConditional() {
