@@ -8,6 +8,18 @@ using UnityEngine;
 public class LobbyNetwork : MonoBehaviour {
     private static string GAME_ID = "abc";
 
+    private static readonly string AUTH_URL = "https://api.yyt.life/auth/simple";
+    private static string LOBBY_URL
+    {
+        get {
+            if (Application.isEditor) {
+                return "wss://dev-ws.yyt.life/lobby?authorization={0}";
+            } else {
+                return "wss://ws.yyt.life/lobby?authorization={0}";
+            }
+        }
+    }
+
     [SerializeField] Network network = null;
 
     void Start() {
@@ -23,7 +35,7 @@ public class LobbyNetwork : MonoBehaviour {
     }
 
     private void RequestAuth() {
-        var request = new HTTPRequest(new System.Uri("https://api.yyt.life/auth/simple"), HTTPMethods.Post, OnAuthRequestFinished);
+        var request = new HTTPRequest(new System.Uri(AUTH_URL), HTTPMethods.Post, OnAuthRequestFinished);
         request.SetHeader("Content-Type", "application/json; charset=UTF-8");
         request.RawData = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(
             new AuthRequest {
@@ -42,7 +54,7 @@ public class LobbyNetwork : MonoBehaviour {
     }
 
     private void RequestMatch(string authToken) {
-        var webSocket = new WebSocket(new System.Uri($"wss://ws.yyt.life/lobby?authorization={authToken}"));
+        var webSocket = new WebSocket(new System.Uri(string.Format(LOBBY_URL, authToken)));
 
         webSocket.OnOpen += delegate(WebSocket socket) {
             Debug.Log("Lobby Socket Open");
