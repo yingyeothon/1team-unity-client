@@ -4,6 +4,7 @@ using UnityEngine.Events;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.SceneManagement;
+using System.Linq;
 
 public class UserInterface : MonoBehaviour {
     [SerializeField] Image playerImage = null;
@@ -14,6 +15,8 @@ public class UserInterface : MonoBehaviour {
     [SerializeField] Transform waitWindow = null;
     [SerializeField] TextMeshProUGUI waitText = null;
     [SerializeField] TextMeshProUGUI runningTimeText = null;
+    [SerializeField] TextMeshProUGUI myCellCount = null;
+    [SerializeField] TextMeshProUGUI yourCellCount = null;
 
     public static UserInterface instance;
 
@@ -33,6 +36,14 @@ public class UserInterface : MonoBehaviour {
 
     public UnityAction onResultWindowClose;
     public UnityAction onResultWindowRestart;
+    public string MyCellCountText {
+        get => myCellCount.text;
+        set => myCellCount.text = value;
+    }
+    public string YourCellCountText {
+        get => yourCellCount.text;
+        set => yourCellCount.text = value;
+    }
 
     public void Awake() {
         instance = this;
@@ -66,6 +77,14 @@ public class UserInterface : MonoBehaviour {
             );
             cube.SetColor(tc.color);
         }
+
+        var cubeCountByColor = cubeDict.GroupBy(e => e.Value.Color).ToDictionary(g => g.Key, g => g.Count());
+        ColorUtility.TryParseHtmlString(playerColor, out var playerColorColor);
+        if (cubeCountByColor.TryGetValue(playerColorColor, out var playerColorCount)) {
+            MyCellCountText = playerColorCount.ToString();
+        }
+        var yourColorCount = cubeCountByColor.FirstOrDefault(e => e.Key != Color.white && e.Key != Color.black && e.Key != playerColorColor);
+        YourCellCountText = yourColorCount.Value.ToString();
     }
 
     public void OnResultGameScore() {

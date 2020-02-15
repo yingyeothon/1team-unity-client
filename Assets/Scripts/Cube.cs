@@ -71,6 +71,11 @@ public class Cube : MonoBehaviour {
 
     internal void SetColor(string v) {
         ColorUtility.TryParseHtmlString(v, out var color);
-        cubeRenderer.material.SetColor("_Color", color);
+        Color = color;
+    }
+
+    public Color Color {
+        get => cubeRenderer.material.GetColor("_Color");
+        set => cubeRenderer.material.SetColor("_Color", value);
     }
 }
