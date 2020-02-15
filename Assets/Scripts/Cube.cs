@@ -43,6 +43,7 @@ public class Cube : MonoBehaviour {
         if (EventSystem.current.IsPointerOverGameObject()) {
             return;
         }
+        Debug.Log($"OnMouseDown(): {this}");
         if (Network.instance != null) {
             if (TileInfo.LevelUpPossible) {
                 Network.instance.OnClientLevelUp(X, Y);
@@ -60,6 +61,9 @@ public class Cube : MonoBehaviour {
         if (EventSystem.current.IsPointerOverGameObject()) {
             return;
         }
+        
+        Debug.Log($"OnMouseUp(): {this}");
+
         //if (IsMine) {
             UserInterface.instance.OpenPurchaseWindow(this);
         //}
@@ -69,6 +73,8 @@ public class Cube : MonoBehaviour {
         if (EventSystem.current.IsPointerOverGameObject()) {
             return;
         }
+
+        Debug.Log($"OnMouseDrag(): {this}");
 
         var ray = MainCamera.instance.Cam.ScreenPointToRay(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0));
         var plane = new Plane(Vector3.up, Vector3.zero);

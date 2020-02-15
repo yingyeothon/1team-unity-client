@@ -5671,7 +5671,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 4685316405654720034}
-        m_MethodName: UpgradeOffence
+        m_MethodName: ConquerCell
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
