@@ -64,6 +64,26 @@ public class Network : MonoBehaviour {
             }
 
             UserInterface.instance.OnPlayerColorChange(loadResponse.me.color);
+
+            var board = loadResponse.board;
+
+            var changeCommands = new List<Command.TileChange>();
+            for (int y = 0; y < board.Count; y++) {
+                for (int x = 0; x < board[y].Count; x++) {
+                    var tile = board[y][x];
+                    changeCommands.Add(new Command.TileChange() {
+                        x = x,
+                        y = y,
+                        color = tile.i == -1 ? "#000000" : users[tile.i].color,
+                        defence = tile.defence,
+                        offence = tile.offence,
+                        productivity = tile.productivity,
+                        attackRange = tile.attackRange,
+                    });
+                }
+            }
+
+            UserInterface.instance.OnTileChanges(changeCommands.ToArray());
         }
         else if (message.StartsWith("{\"type\":\"enter\",")) {
             var enterResponse = JsonConvert.DeserializeObject<Response.EnterResponse>(message);
