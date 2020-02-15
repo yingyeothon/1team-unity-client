@@ -14,6 +14,8 @@ public class Cube : MonoBehaviour {
     public int Y { get => y; set => y = value; }
     public TileInfo TileInfo => tileInfo;
 
+    public bool IsMine => UserInterface.instance.IsMine(this);
+
     void Awake() {
         tileInfo = UserInterface.instance.InstantiateTileInfo(this);
 
@@ -41,14 +43,25 @@ public class Cube : MonoBehaviour {
         if (EventSystem.current.IsPointerOverGameObject()) {
             return;
         }
-        if (TileInfo.LevelUpPossible) {
-            Network.instance.OnClientLevelUp(X, Y);
-            Network.instance.sharedAudioSource.PlayOneShot(Network.instance.upgradeClip);
-        } else {
-            Network.instance.OnClientClick(X, Y);
+        if (Network.instance != null) {
+            if (TileInfo.LevelUpPossible) {
+                Network.instance.OnClientLevelUp(X, Y);
+                Network.instance.sharedAudioSource.PlayOneShot(Network.instance.upgradeClip);
+            } else {
+                Network.instance.OnClientClick(X, Y);
+            }
+
+            Network.instance.sharedAudioSource.PlayOneShot(Network.instance.clickClip);
         }
-        
-        Network.instance.sharedAudioSource.PlayOneShot(Network.instance.clickClip);
+    }
+
+    void OnMouseUp() {
+        if (EventSystem.current.IsPointerOverGameObject()) {
+            return;
+        }
+        //if (IsMine) {
+            UserInterface.instance.OpenPurchaseWindow(this);
+        //}
     }
 
     private void SetHighlightHeightConditional() {

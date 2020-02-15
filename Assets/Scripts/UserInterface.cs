@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using TMPro;
 using UnityEngine.SceneManagement;
 using System.Linq;
+using System;
 
 public class UserInterface : MonoBehaviour {
     [SerializeField] Image playerImage = null;
@@ -19,6 +20,9 @@ public class UserInterface : MonoBehaviour {
     [SerializeField] TextMeshProUGUI yourCellCount = null;
     [SerializeField] GameObject upgradeWindow = null;
     [SerializeField] GameObject purchaseWindow = null;
+    //[SerializeField] RectTransform upgradeTargetCubeFrame = null;
+    //[SerializeField] RectTransform purchaseTargetCubeFrame = null;
+    //[SerializeField] Camera interfaceCam = null;
     
     public static UserInterface instance;
 
@@ -37,6 +41,12 @@ public class UserInterface : MonoBehaviour {
     }
 
     public UnityAction onResultWindowClose;
+
+    internal void OpenPurchaseWindow(Cube cube) {
+        Debug.Log("OpenPurchaseWindow()");
+        purchaseWindow.gameObject.SetActive(true);
+    }
+
     public UnityAction onResultWindowRestart;
     public string MyCellCountText {
         get => myCellCount.text;
@@ -154,5 +164,13 @@ public class UserInterface : MonoBehaviour {
 
     public void CancelPurchase() {
         purchaseWindow.gameObject.SetActive(false);
+    }
+
+    internal bool IsMine(Cube cube) {
+        if (ColorUtility.TryParseHtmlString(playerColor, out var color)) {
+            return color == cube.Color;
+        } else {
+            return false;
+        }
     }
 }

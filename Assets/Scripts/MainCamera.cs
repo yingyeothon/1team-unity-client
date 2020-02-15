@@ -1,26 +1,29 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 [ExecuteInEditMode]
 public class MainCamera : MonoBehaviour {
-
+    public static MainCamera instance;
     Camera mainCamera;
     public Camera Cam => mainCamera;
     GameObject cubeGroup;
     public AudioSource bgmAudioSource;
     [SerializeField] float margin = 2.0f;
+    private Vector3 lookAtTargetPos = Vector3.zero;
 
     void Awake() {
         InitReferences();
     }
 
     void InitReferences() {
+        instance = this;
         mainCamera = GetComponent<Camera>();
         cubeGroup = GameObject.Find("Cube Group");
     }
 
     void Update() {
-        transform.LookAt(Vector3.zero);
-        transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y, -transform.localPosition.x);
+        //transform.LookAt(lookAtTargetPos);
+        //transform.localPosition = lookAtTargetPos + new Vector3(transform.localPosition.x, transform.localPosition.y, -transform.localPosition.x);
 
         AdjustCamOrthographicSize();
     }
@@ -49,6 +52,10 @@ public class MainCamera : MonoBehaviour {
         if (camDist != 0 && cubeDist != 0) {
             Cam.orthographicSize *= cubeDist / camDist;
         }
+    }
+
+    internal void SetViewTargetCube(Cube cube) {
+        transform.position = new Vector3(cube.transform.position.x, transform.position.y, cube.transform.position.z);
     }
 
     private Vector3 GetScreenPointToWorldGroundPoint(int screenPointX, int screenPointY) {
