@@ -44,10 +44,13 @@ public class UserInterface : MonoBehaviour {
 
     internal void OpenPurchaseWindow(Cube cube) {
         Debug.Log("OpenPurchaseWindow()");
+        lastSelectedCube = cube;
         purchaseWindow.gameObject.SetActive(true);
     }
 
     public UnityAction onResultWindowRestart;
+    private Cube lastSelectedCube;
+
     public string MyCellCountText {
         get => myCellCount.text;
         set => myCellCount.text = value;
@@ -142,23 +145,33 @@ public class UserInterface : MonoBehaviour {
         SceneManager.LoadScene(loadedLevel.buildIndex);
     }
 
-    public void UpgradeOffence(int x, int y) {
+    public void UpgradeOffence() {
+        var x = lastSelectedCube.X;
+        var y = lastSelectedCube.Y;
         // Network.instance.UpgradeOffence(x, y);
     }
 
-    public void UpgradeDefence(int x, int y) {
+    public void UpgradeDefence() {
+        var x = lastSelectedCube.X;
+        var y = lastSelectedCube.Y;
         // Network.instance.UpgradeDefence(x, y);
     }
 
-    public void UpgradeProductivity(int x, int y) {
+    public void UpgradeProductivity() {
+        var x = lastSelectedCube.X;
+        var y = lastSelectedCube.Y;
         // Network.instance.UpgradeProductivity(x, y);
     }
 
-    public void UpgradeAttackRange(int x, int y) {
+    public void UpgradeAttackRange() {
+        var x = lastSelectedCube.X;
+        var y = lastSelectedCube.Y;
         // Network.instance.UpgradeAttackRange(x, y);
     }
 
-    public void ConquerCell(int x, int y) {
+    public void ConquerCell() {
+        var x = lastSelectedCube.X;
+        var y = lastSelectedCube.Y;
         // Network.instance.ConquerCell(x, y);
     }
 
