@@ -102,7 +102,7 @@ public class Network : MonoBehaviour {
             var scores = endResponse.score.ToList();
             scores.Sort((a, b) => b.Value.power.CompareTo(a.Value.power));
             foreach (var kv in scores) {
-                UserInterface.instance.OnResultAddEntry(users[kv.Key].color, kv.Value.power.ToString());
+                UserInterface.instance.OnResultAddEntry(users[kv.Key].color, kv.Value.tile.ToString());
             }
 
             webSocket.Close();
