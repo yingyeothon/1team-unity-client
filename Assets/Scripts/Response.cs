@@ -62,9 +62,9 @@ namespace Response {
     }
 
     [System.Serializable]
-    public struct ClickResponse {
+    public struct TileChangedResponse {
         public string type;
-        public List<TileChange> changes;
+        public List<TileChange> data;
     }
 
     [System.Serializable]
@@ -102,7 +102,10 @@ namespace Response {
     public struct Tile {
         public int i;
         public int v;
-        public int l;
+        public int defence;
+        public int offence;
+        public int productivity;
+        public int attackRange;
     }
 
     [System.Serializable]
@@ -117,9 +120,11 @@ namespace Response {
         public int y;
 
         public int i;
-        public int v;
-        public int l;
-        public bool p;
+
+        public int defence;
+        public int offence;
+        public int productivity;
+        public int attackRange;
     }
 
     [System.Serializable]
