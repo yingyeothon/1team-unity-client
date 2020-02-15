@@ -12,11 +12,11 @@ public class Network : MonoBehaviour {
     public static Network instance;
 
     public Response.MatchInfo MatchInfo { get; set; }
-        // = new Response.MatchInfo {
-        //     url = "ws://localhost:3001",
-        //     gameId = "local-test-1",
-        //     playerId = "me",
-        // };
+    // = new Response.MatchInfo {
+    //     url = "ws://localhost:3001",
+    //     gameId = "local-test-1",
+    //     playerId = "me",
+    // };
 
     public AudioClip clickClip;
     public AudioClip upgradeClip;
@@ -58,7 +58,6 @@ public class Network : MonoBehaviour {
         Debug.Log("Text Message received from server: " + message);
         if (message.StartsWith("{\"type\":\"load\",")) {
             var loadResponse = JsonConvert.DeserializeObject<Response.LoadResponse>(message);
-            Debug.Log(JsonConvert.SerializeObject(loadResponse));
 
             foreach (var user in loadResponse.users) {
                 users[user.index] = user;
@@ -68,22 +67,21 @@ public class Network : MonoBehaviour {
         }
         else if (message.StartsWith("{\"type\":\"enter\",")) {
             var enterResponse = JsonConvert.DeserializeObject<Response.EnterResponse>(message);
-            Debug.Log("Enter: " + JsonConvert.SerializeObject(enterResponse));
 
             users[enterResponse.newbie.index] = enterResponse.newbie;
         }
-        else if (message.StartsWith("{\"type\":\"click\",")) {
-            var clickResponse = JsonConvert.DeserializeObject<Response.ClickResponse>(message);
-            Debug.Log("ServerClick: " + JsonConvert.SerializeObject(clickResponse));
+        else if (message.StartsWith("{\"type\":\"changed\",")) {
+            var clickResponse = JsonConvert.DeserializeObject<Response.TileChangedResponse>(message);
 
-            var changeCommands = clickResponse.changes
+            var changeCommands = clickResponse.data
                 .Select(changeResponse => new Command.TileChange() {
                     x = changeResponse.x,
                     y = changeResponse.y,
                     color = changeResponse.i == -1 ? "#000000" : users[changeResponse.i].color,
-                    v = (int) changeResponse.v,
-                    l = changeResponse.l,
-                    p = changeResponse.p,
+                    defence = changeResponse.defence,
+                    offence = changeResponse.offence,
+                    productivity = changeResponse.productivity,
+                    attackRange = changeResponse.attackRange,
                 })
                 .ToArray();
 
@@ -91,7 +89,6 @@ public class Network : MonoBehaviour {
         }
         else if (message.StartsWith("{\"type\":\"energy\",")) {
             var energyChangedResponse = JsonConvert.DeserializeObject<Response.EnergyChangedResponse>(message);
-            Debug.Log("EnergyChanged: " + JsonConvert.SerializeObject(energyChangedResponse));
 
             UserInterface.instance.OnEnergyChange(energyChangedResponse.value);
         }
