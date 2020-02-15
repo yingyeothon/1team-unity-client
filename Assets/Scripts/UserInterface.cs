@@ -20,6 +20,7 @@ public class UserInterface : MonoBehaviour {
     [SerializeField] TextMeshProUGUI yourCellCount = null;
     [SerializeField] GameObject upgradeWindow = null;
     [SerializeField] GameObject purchaseWindow = null;
+    [SerializeField] TextMeshProUGUI energyText = null;
     //[SerializeField] RectTransform upgradeTargetCubeFrame = null;
     //[SerializeField] RectTransform purchaseTargetCubeFrame = null;
     //[SerializeField] Camera interfaceCam = null;
@@ -46,6 +47,12 @@ public class UserInterface : MonoBehaviour {
         Debug.Log("OpenPurchaseWindow()");
         lastSelectedCube = cube;
         purchaseWindow.gameObject.SetActive(true);
+    }
+
+    internal void OpenUpgradeWindow(Cube cube) {
+        Debug.Log("OpenUpgradeWindow()");
+        lastSelectedCube = cube;
+        upgradeWindow.gameObject.SetActive(true);
     }
 
     public UnityAction onResultWindowRestart;
@@ -79,7 +86,7 @@ public class UserInterface : MonoBehaviour {
     }
 
     public void OnEnergyChange(int value) {
-        // TODO show energy
+        energyText.text = value.ToString();
     }
 
     public void OnTileChanges(Command.TileChange[] tileChanges) {

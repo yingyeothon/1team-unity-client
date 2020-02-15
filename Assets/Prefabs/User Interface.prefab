@@ -3208,7 +3208,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 555
+  m_text: '---'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -5019,6 +5019,7 @@ MonoBehaviour:
   yourCellCount: {fileID: 947892985945582400}
   upgradeWindow: {fileID: 7589552576410771463}
   purchaseWindow: {fileID: 2015602355524639212}
+  energyText: {fileID: 5646585217101080582}
 --- !u!1 &4751235344537658697
 GameObject:
   m_ObjectHideFlags: 0
