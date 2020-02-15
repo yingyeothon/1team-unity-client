@@ -99,7 +99,11 @@ public class UserInterface : MonoBehaviour {
                 tc.color,
                 tc.v.ToString(),
                 tc.l.ToString(),
-                tc.color.Equals(playerColor) && tc.p ? "!" : ""
+                tc.color.Equals(playerColor) && tc.p ? "!" : "",
+                tc.defence,
+                tc.offence,
+                tc.productivity,
+                tc.attackRange
             );
             cube.SetColor(tc.color);
         }
@@ -107,7 +111,7 @@ public class UserInterface : MonoBehaviour {
         var cubeCountByColor = cubeDict.GroupBy(e => e.Value.Color).ToDictionary(g => g.Key, g => g.Count());
         ColorUtility.TryParseHtmlString(playerColor, out var playerColorColor);
         if (cubeCountByColor.TryGetValue(playerColorColor, out var playerColorCount)) {
-            MyCellCountText = playerColorCount.ToString();
+            MyCellCountText = playerColorCount.ToString();  
         }
         var yourColorCount = cubeCountByColor.FirstOrDefault(e => e.Key != Color.white && e.Key != Color.black && e.Key != playerColorColor);
         YourCellCountText = yourColorCount.Value.ToString();

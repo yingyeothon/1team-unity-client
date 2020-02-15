@@ -34,7 +34,7 @@ public class Cube : MonoBehaviour {
     void OnMouseOver() {
         SetHighlightHeightConditional();
         if (LastOverCube != this) {
-            Debug.Log($"Over: {this}");
+            //Debug.Log($"Over: {this}");
             LastOverCube = this;
         }
     }
@@ -47,7 +47,7 @@ public class Cube : MonoBehaviour {
         if (EventSystem.current.IsPointerOverGameObject()) {
             return;
         }
-        Debug.Log($"OnMouseDown(): {this}");
+        //Debug.Log($"OnMouseDown(): {this}");
         if (Network.instance != null) {
             if (TileInfo.LevelUpPossible) {
                 Network.instance.OnClientLevelUp(X, Y);
@@ -61,12 +61,11 @@ public class Cube : MonoBehaviour {
     }
 
     void OnMouseUp() {
-        Debug.Log($"OnMouseUp(): {this}");
+        //Debug.Log($"OnMouseUp(): {this}");
         DragIndicator.instance.EnableRenderer = false;
 
         if (this != LastOverCube) {
-            Debug.Log($"Drag: {this} --> {LastOverCube}");
-            //Network.instance.
+            //Debug.Log($"Drag: {this} --> {LastOverCube}");
             Network.instance.Attack(X, Y, LastOverCube.X, LastOverCube.Y);
             return;
         }

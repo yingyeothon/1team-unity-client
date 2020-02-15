@@ -32,13 +32,13 @@ public class TileInfo : MonoBehaviour {
         rectParent = transform.parent.GetComponent<RectTransform>();
     }
 
-    public void SetData(string color, string v, string l, string p) {
+    public void SetData(string color, string v, string l, string p, int defence, int offence, int productivity, int attackRange) {
         ColorUtility.TryParseHtmlString(color, out var c);
         image.color = c;
-        offenceText.text = v;
-        defenceText.text = l;
-        productivityText.text = "-";
-        attackRangeText.text = "-";
+        offenceText.text = offence.ToString();
+        defenceText.text = defence.ToString();
+        productivityText.text = productivity.ToString();
+        attackRangeText.text = attackRange.ToString();
         //levelUpPossible.text = p;
     }
 
