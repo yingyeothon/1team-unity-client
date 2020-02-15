@@ -12,6 +12,11 @@ public class Network : MonoBehaviour {
     public static Network instance;
 
     public Response.MatchInfo MatchInfo { get; set; }
+        // = new Response.MatchInfo {
+        //     url = "ws://localhost:3001",
+        //     gameId = "local-test-1",
+        //     playerId = "me",
+        // };
 
     public AudioClip clickClip;
     public AudioClip upgradeClip;
@@ -25,7 +30,8 @@ public class Network : MonoBehaviour {
     }
 
     void Start() {
-        webSocket = new WebSocket(new System.Uri($"{MatchInfo.url}?x-game-id={MatchInfo.gameId}&x-member-id={MatchInfo.playerId}"));
+        webSocket = new WebSocket(
+            new System.Uri($"{MatchInfo.url}?x-game-id={MatchInfo.gameId}&x-member-id={MatchInfo.playerId}"));
         webSocket.OnOpen += OnWebSocketOpen;
         webSocket.OnMessage += OnMessageReceived;
         webSocket.OnBinary += OnBinaryMessageReceived;
@@ -83,6 +89,12 @@ public class Network : MonoBehaviour {
 
             UserInterface.instance.OnTileChanges(changeCommands);
         }
+        else if (message.StartsWith("{\"type\":\"energy\",")) {
+            var energyChangedResponse = JsonConvert.DeserializeObject<Response.EnergyChangedResponse>(message);
+            Debug.Log("EnergyChanged: " + JsonConvert.SerializeObject(energyChangedResponse));
+
+            UserInterface.instance.OnEnergyChange(energyChangedResponse.value);
+        }
         else if (message.StartsWith("{\"type\":\"stage\",")) {
             var stage = JsonConvert.DeserializeObject<Response.Stage>(message);
             if (stage.stage == "wait") {
@@ -90,6 +102,7 @@ public class Network : MonoBehaviour {
             }
             else if (stage.stage == "running") {
                 UserInterface.instance.OnRunning(stage.age);
+                UserInterface.instance.OnEnergyChange(stage.energy);
 
                 flameGroup.SetActive(true);
             }
@@ -117,30 +130,58 @@ public class Network : MonoBehaviour {
         webSocket.Send(JsonConvert.SerializeObject(new Response.LoadRequest()));
     }
 
-    public void OnClientClick(int x, int y) {
-        var clickRequest = new Response.ClickRequest() {
-            data = new List<Response.ClickRequestData>() {
-                new Response.ClickRequestData {
-                    value = 1,
-                    x = x,
-                    y = y,
-                }
-            }
-        };
-        webSocket.Send(JsonConvert.SerializeObject(clickRequest));
+    public void ConquerCell(int x, int y) {
+        SendOneTileClickRequest(Response.OneTileClickRequest.TypeNew, x, y);
     }
 
-    public void OnClientLevelUp(int x, int y) {
-        var levelUpRequest = new Response.LevelUpRequest() {
-            data = new List<Response.LevelUpRequestData>() {
-                new Response.LevelUpRequestData() {
-                    value = 1,
-                    x = x,
-                    y = y,
-                }
-            }
+    public void UpgradeDefence(int x, int y) {
+        SendOneTileClickRequest(Response.OneTileClickRequest.TypeDefenceUp, x, y);
+    }
+
+    public void UpgradeOffence(int x, int y) {
+        SendOneTileClickRequest(Response.OneTileClickRequest.TypeOffenceUp, x, y);
+    }
+
+    public void UpgradeProductivity(int x, int y) {
+        SendOneTileClickRequest(Response.OneTileClickRequest.TypeProductivityUp, x, y);
+    }
+
+    public void UpgradeAttackRange(int x, int y) {
+        SendOneTileClickRequest(Response.OneTileClickRequest.TypeAttackRangeUp, x, y);
+    }
+
+    public void Attack(int fromX, int fromY, int toX, int toY) {
+        SendTwoTileClickRequest(Response.TwoTileClickRequest.TypeAttack, fromX, fromY, toX, toY);
+    }
+
+    private void SendOneTileClickRequest(string type, int x, int y) {
+        var oneTileClickRequest = new Response.OneTileClickRequest() {
+            type = type,
+            x = x,
+            y = y,
         };
-        webSocket.Send(JsonConvert.SerializeObject(levelUpRequest));
+        var message = JsonConvert.SerializeObject(oneTileClickRequest);
+        Debug.Log("SendOneTileClickRequest: " + message);
+        webSocket.Send(message);
+    }
+
+    private void SendTwoTileClickRequest(string type, int fromX, int fromY, int toX, int toY) {
+        var oneTileClickRequest = new Response.TwoTileClickRequest() {
+            type = type,
+            from = new Response.Pos() {x = fromX, y = fromY},
+            to = new Response.Pos() {x = toX, y = toY},
+        };
+        var message = JsonConvert.SerializeObject(oneTileClickRequest);
+        Debug.Log("SendTwoTileClickRequest: " + message);
+        webSocket.Send(message);
+    }
+
+    // TODO Delete
+    public void OnClientClick(int x, int y) {
+    }
+
+    // TODO Delete
+    public void OnClientLevelUp(int x, int y) {
     }
 
     public void OnLoadButton() {

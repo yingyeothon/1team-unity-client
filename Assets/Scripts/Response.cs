@@ -40,22 +40,37 @@ namespace Response {
     }
 
     [System.Serializable]
-    public class ClickRequest {
-        public string type = "click";
-        public List<ClickRequestData> data;
+    public class OneTileClickRequest {
+        public static string TypeNew = "new";
+        public static string TypeDefenceUp = "defenceUp";
+        public static string TypeOffenceUp = "offenceUp";
+        public static string TypeProductivityUp = "productivityUp";
+        public static string TypeAttackRangeUp = "attackRangeUp";
+
+        public string type;
+        public int x;
+        public int y;
     }
 
     [System.Serializable]
-    public class ClickRequestData {
-        public int value;
-        public int x;
-        public int y;
+    public class TwoTileClickRequest {
+        public static string TypeAttack = "attack";
+
+        public string type;
+        public Pos from;
+        public Pos to;
     }
 
     [System.Serializable]
     public struct ClickResponse {
         public string type;
         public List<TileChange> changes;
+    }
+
+    [System.Serializable]
+    public struct EnergyChangedResponse {
+        public string type;
+        public int value;
     }
 
     [System.Serializable]
@@ -112,6 +127,7 @@ namespace Response {
         public string type;
         public string stage;
         public int age;
+        public int energy;
     }
 
 }
