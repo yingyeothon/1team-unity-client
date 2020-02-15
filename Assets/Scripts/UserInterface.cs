@@ -23,7 +23,7 @@ public class UserInterface : MonoBehaviour {
     //[SerializeField] RectTransform upgradeTargetCubeFrame = null;
     //[SerializeField] RectTransform purchaseTargetCubeFrame = null;
     //[SerializeField] Camera interfaceCam = null;
-    
+
     public static UserInterface instance;
 
     Dictionary<System.Tuple<int, int>, Cube> cubeDict = new Dictionary<System.Tuple<int, int>, Cube>();
@@ -73,6 +73,10 @@ public class UserInterface : MonoBehaviour {
 
         ColorUtility.TryParseHtmlString(playerColor, out var color);
         playerImage.color = color;
+    }
+
+    public void OnEnergyChange(int value) {
+        // TODO show energy
     }
 
     public void OnTileChanges(Command.TileChange[] tileChanges) {
@@ -138,24 +142,24 @@ public class UserInterface : MonoBehaviour {
         SceneManager.LoadScene(loadedLevel.buildIndex);
     }
 
-    public void UpgradeOffence() {
-
+    public void UpgradeOffence(int x, int y) {
+        // Network.instance.UpgradeOffence(x, y);
     }
 
-    public void UpgradeDefence() {
-
+    public void UpgradeDefence(int x, int y) {
+        // Network.instance.UpgradeDefence(x, y);
     }
 
-    public void UpgradeProductivity() {
-
+    public void UpgradeProductivity(int x, int y) {
+        // Network.instance.UpgradeProductivity(x, y);
     }
 
-    public void UpgradeAttackRange() {
-
+    public void UpgradeAttackRange(int x, int y) {
+        // Network.instance.UpgradeAttackRange(x, y);
     }
 
-    public void ConquerCell() {
-
+    public void ConquerCell(int x, int y) {
+        // Network.instance.ConquerCell(x, y);
     }
 
     public void CancelUpgrade() {
