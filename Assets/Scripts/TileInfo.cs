@@ -4,9 +4,11 @@ using UnityEngine.UI;
 
 public class TileInfo : MonoBehaviour {
     [SerializeField] Image image = null;
-    [SerializeField] TextMeshProUGUI value = null;
-    [SerializeField] TextMeshProUGUI level = null;
-    [SerializeField] TextMeshProUGUI levelUpPossible = null;
+
+    [SerializeField] TextMeshProUGUI defenceText = null;
+    [SerializeField] TextMeshProUGUI offenceText = null;
+    [SerializeField] TextMeshProUGUI productivityText = null;
+    [SerializeField] TextMeshProUGUI attackRangeText = null;
 
     Transform tile;
     RectTransform rectParent;
@@ -18,7 +20,7 @@ public class TileInfo : MonoBehaviour {
         set => tile = value;
     }
 
-    public bool LevelUpPossible => levelUpPossible.text.Equals("!");
+    public bool LevelUpPossible => false; //levelUpPossible.text.Equals("!");
 
     void Awake() {
         InitBind();
@@ -33,9 +35,11 @@ public class TileInfo : MonoBehaviour {
     public void SetData(string color, string v, string l, string p) {
         ColorUtility.TryParseHtmlString(color, out var c);
         image.color = c;
-        value.text = v;
-        level.text = l;
-        levelUpPossible.text = p;
+        offenceText.text = v;
+        defenceText.text = l;
+        productivityText.text = "-";
+        attackRangeText.text = "-";
+        //levelUpPossible.text = p;
     }
 
     void LateUpdate() {
