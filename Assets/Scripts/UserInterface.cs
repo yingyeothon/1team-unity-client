@@ -160,30 +160,35 @@ public class UserInterface : MonoBehaviour {
         var x = lastSelectedCube.X;
         var y = lastSelectedCube.Y;
         Network.instance.UpgradeOffence(x, y);
+        upgradeWindow.gameObject.SetActive(false);
     }
 
     public void UpgradeDefence() {
         var x = lastSelectedCube.X;
         var y = lastSelectedCube.Y;
         Network.instance.UpgradeDefence(x, y);
+        upgradeWindow.gameObject.SetActive(false);
     }
 
     public void UpgradeProductivity() {
         var x = lastSelectedCube.X;
         var y = lastSelectedCube.Y;
         Network.instance.UpgradeProductivity(x, y);
+        upgradeWindow.gameObject.SetActive(false);
     }
 
     public void UpgradeAttackRange() {
         var x = lastSelectedCube.X;
         var y = lastSelectedCube.Y;
         Network.instance.UpgradeAttackRange(x, y);
+        upgradeWindow.gameObject.SetActive(false);
     }
 
     public void ConquerCell() {
         var x = lastSelectedCube.X;
         var y = lastSelectedCube.Y;
         Network.instance.ConquerCell(x, y);
+        purchaseWindow.gameObject.SetActive(false);
     }
 
     public void CancelUpgrade() {
