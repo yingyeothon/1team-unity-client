@@ -6,7 +6,7 @@ using Newtonsoft.Json;
 using UnityEngine;
 
 public class LobbyNetwork : MonoBehaviour {
-    private static string GAME_ID = "abc";
+    private static string GAME_ID = "37730654-4888-4374-89b2-9bd8a84b8d21";
 
     private static readonly string AUTH_URL = "https://api.yyt.life/auth/simple";
     private static string LOBBY_URL
